@@ -1,5 +1,5 @@
 class LogUtil {
-  static const String _defTag = "Log";
+  static const String _defTag = 'Log';
   static bool _debugMode = false;
   static int _maxLen = 128;
   static String _tagValue = _defTag;
@@ -25,7 +25,7 @@ class LogUtil {
   }
 
   static void _printLog(String tag, String stag, Object object) {
-    String da = object.toString();
+    var da = object.toString();
     tag = tag ?? _tagValue;
     if (da.length <= _maxLen) {
       print("$tag$stag $da");
@@ -39,7 +39,7 @@ class LogUtil {
         da = da.substring(_maxLen, da.length);
       } else {
         print("$tag$stag| $da");
-        da = "";
+        da = '';
       }
     }
     print(

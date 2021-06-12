@@ -91,7 +91,7 @@ class _TextInputAreaState extends State<TextInputArea> {
     _mapTextCapitalization();
     _controller ??= widget.controller ?? TextEditingController();
     _hidden = widget.password ?? false;
-    if (widget.initialValue != null)
+    if (widget.initialValue != null) {
       _controller.value = _controller.value.copyWith(
         text: widget.initialValue ?? '',
         selection: TextSelection(
@@ -99,6 +99,7 @@ class _TextInputAreaState extends State<TextInputArea> {
           extentOffset: widget.initialValue?.length ?? 0,
         ),
       );
+    }
 
     _focusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(onFocused);
@@ -174,7 +175,7 @@ class _TextInputAreaState extends State<TextInputArea> {
       textAlign: widget.textAlign ?? TextAlign.start,
       textCapitalization: _textCapitalization,
       keyboardType: widget.keyboardType ?? TextInputType.text,
-      buildCounter: (BuildContext context, {int currentLength, int maxLength, bool isFocused}) {
+      buildCounter: (context, {currentLength, maxLength, isFocused}) {
         if (widget.visibleCounterText ?? true && maxLength != null) {
           return Text(
             '$currentLength/$maxLength',

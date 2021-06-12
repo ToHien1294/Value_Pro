@@ -6,11 +6,11 @@ import '../app_localizations/app_localizations.dart';
 class LoadingWidget extends StatelessWidget {
   final String titleKeyStr;
 
-  LoadingWidget({this.titleKeyStr});
+  const LoadingWidget({this.titleKeyStr});
 
   @override
   Widget build(BuildContext context) {
-    var localizations = AppLocalizations.of(context);
+    final localizations = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,

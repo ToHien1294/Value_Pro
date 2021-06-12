@@ -10,7 +10,7 @@ class AppLocalizations implements WidgetsLocalizations {
   static AppLocalizationsDelegate delegate = AppLocalizationsDelegate._();
 
   static Map<dynamic, dynamic> localizedValues = {};
-  static Map<String, String> _cache = {};
+  static final Map<String, String> _cache = {};
 
   static Future<AppLocalizations> load(Locale locale) async {
     await setNewLanguage(locale.languageCode);
@@ -29,7 +29,7 @@ class AppLocalizations implements WidgetsLocalizations {
       localeName = LocaleCodes.vi;
     }
 
-    String jsonContent = await rootBundle.loadString("assets/locale/i18n_$localeName.json");
+    final var jsonContent = await rootBundle.loadString('assets/locale/i18n_$localeName.json');
     localizedValues = json.decode(jsonContent);
     _cache.clear();
 
@@ -42,21 +42,21 @@ class AppLocalizations implements WidgetsLocalizations {
   AppLocalizations(this.locale);
 
   String text(String key, {List<dynamic> args}) {
-    String string = '** $key not found';
+    var string = '** $key not found';
 
     if (localizedValues != null) {
       if (_cache[key] != null && args == null) {
         string = _cache[key];
       } else {
-        bool found = true;
-        Map<dynamic, dynamic> _values = localizedValues;
-        List<String> _keyParts = key.split('.');
-        int _keyPartsLen = _keyParts.length;
-        int index = 0;
-        int lastIndex = _keyPartsLen - 1;
+        var found = true;
+        var _values = localizedValues;
+        final _keyParts = key.split('.');
+        final _keyPartsLen = _keyParts.length;
+        var index = 0;
+        final lastIndex = _keyPartsLen - 1;
 
         while (index < _keyPartsLen && found) {
-          var value = _values[_keyParts[index]];
+          final value = _values[_keyParts[index]];
 
           if (value == null) {
             found = false;
@@ -118,7 +118,7 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   }
 
   LocaleListResolutionCallback listResolution({Locale fallback}) {
-    return (List<Locale> locales, Iterable<Locale> supported) {
+    return (locales, supported) {
       if (locales == null || locales.isEmpty) {
         return fallback ?? supportedLocales.first;
       } else {
@@ -128,7 +128,7 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   }
 
   LocaleResolutionCallback resolution({Locale fallback}) {
-    return (Locale locale, Iterable<Locale> supported) {
+    return (locale, supported) {
       return _resolve(locale, fallback, supported);
     };
   }

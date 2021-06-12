@@ -2,17 +2,21 @@ import 'package:intl/intl.dart';
 
 extension DynamicExtension on dynamic {
   String get formatCurrency {
-    final locale = 'vi';
-    final currencyName = 'đ';
-    final errorText = '0';
-    var formatter = NumberFormat.currency(locale: locale, name: currencyName, decimalDigits: 0, customPattern: "#,##0.00\u00A4");
-    switch (this.runtimeType) {
+    const locale = 'vi';
+    const currencyName = 'đ';
+    const errorText = '0';
+    final formatter = NumberFormat.currency(
+        locale: locale,
+        name: currencyName,
+        decimalDigits: 0,
+        customPattern: '#,##0.00\u00A4');
+    switch (runtimeType) {
       case num:
       case int:
       case double:
         return formatter.format(this);
       case String:
-        var value = double.tryParse(this);
+        final value = double.tryParse(this);
         if (value == null) {
           return errorText;
         }

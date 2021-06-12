@@ -7,8 +7,8 @@ class UIHelper {
   static const double aspectRatio_20_9 = 20 / 9;
   static const double aspectRatio_5_4 = 5 / 4;
   static const double aspectRatio_4_3 = 4 / 3;
-  static const double defaultBorderRadius = 12.0;
-  static const double maximumHomeSliverAppBarHeight = 350.0;
+  static const double defaultBorderRadius = 12;
+  static const double maximumHomeSliverAppBarHeight = 350;
   static const int cacheWidth = 1000;
   static const int cacheHeight = 1000;
 
@@ -74,12 +74,12 @@ class UIHelper {
   static const horizontalEdgeInsets32 = EdgeInsets.symmetric(horizontal: 32);
 
   /// Padding EdgeInsets
-  static const paddingAll2 = const EdgeInsets.all(2);
-  static const paddingAll4 = const EdgeInsets.all(4);
-  static const paddingAll6 = const EdgeInsets.all(6);
-  static const paddingAll8 = const EdgeInsets.all(8);
-  static const paddingAll12 = const EdgeInsets.all(12);
-  static const paddingAll16 = const EdgeInsets.all(16);
-  static const paddingAll24 = const EdgeInsets.all(24);
-  static const paddingZero = const EdgeInsets.all(0);
+  static const paddingAll2 = EdgeInsets.all(2);
+  static const paddingAll4 = EdgeInsets.all(4);
+  static const paddingAll6 = EdgeInsets.all(6);
+  static const paddingAll8 = EdgeInsets.all(8);
+  static const paddingAll12 = EdgeInsets.all(12);
+  static const paddingAll16 = EdgeInsets.all(16);
+  static const paddingAll24 = EdgeInsets.all(24);
+  static const paddingZero = EdgeInsets.all(0);
 }

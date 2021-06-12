@@ -6,7 +6,7 @@ abstract class IRestUtility {
   Future<Response> request(
     String url,
     Method method, {
-    dynamic data,
+    data,
     Map<String, dynamic> queryParameters,
     CancelToken cancelToken,
     Options options,
@@ -28,7 +28,7 @@ class RestUtility implements IRestUtility {
     int receiveTimeout = 30000,
     int sendTimeout = 30000,
   }) {
-    BaseOptions _options = BaseOptions(
+    final var _options = BaseOptions(
       connectTimeout: connectTimeout,
       receiveTimeout: receiveTimeout,
       sendTimeout: sendTimeout,
@@ -49,7 +49,7 @@ class RestUtility implements IRestUtility {
   Future<Response> _createRequest(
     String method,
     String url, {
-    dynamic data,
+    data,
     Map<String, dynamic> queryParameters,
     CancelToken cancelToken,
     Options options,
@@ -76,7 +76,7 @@ class RestUtility implements IRestUtility {
   Future<Response> request(
     String url,
     Method method, {
-    dynamic data,
+    data,
     Map<String, dynamic> queryParameters,
     CancelToken cancelToken,
     Options options,

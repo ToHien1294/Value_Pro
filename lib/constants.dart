@@ -1,11 +1,11 @@
 class AppConstants {
   static const int pageSize = 10;
   static const int indexFirstPage = 0;
-  static const String nullString = "--";
-  static const String emptyString = "";
-  static const String requiredString = "*";
-  static const String spaceString = " ";
-  static const String dashString = " - ";
+  static const String nullString = '--';
+  static const String emptyString = '';
+  static const String requiredString = '*';
+  static const String spaceString = ' ';
+  static const String dashString = ' - ';
 }
 
 class ImageConstants {
@@ -22,7 +22,7 @@ class SVGConstants {
 
 class FlagConstants {
   static const String base = 'assets/flags/';
-  static String path(String code) => base + code + '.svg';
+  static String path(String code) => '$base$code.svg';
 }
 
 class EnvironmentConstant {

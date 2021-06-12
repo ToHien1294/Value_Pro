@@ -5,14 +5,15 @@ import '../enums.dart';
 class AppConfig {
   GlobalConfiguration get globalConfiguration => GlobalConfiguration();
 
-  static AppConfig _singleton = AppConfig._internal();
+  static final AppConfig _singleton = AppConfig._internal();
 
   static AppConfig get instance => _singleton;
 
+  // ignore: sort_constructors_first
   AppConfig._internal();
 
   Future loadConfig({Environment env = Environment.dev}) async {
-    var appEnv = env.value;
+    final appEnv = env.value;
     await GlobalConfiguration().loadFromAsset('app_config_$appEnv');
   }
 
@@ -22,9 +23,11 @@ class AppConfig {
 
   String get userApiEndpoint => globalConfiguration.get('userApiEndpoint');
 
-  String get customerApiEndpoint => globalConfiguration.get('customerApiEndpoint');
+  String get customerApiEndpoint =>
+      globalConfiguration.get('customerApiEndpoint');
 
-  String get notificationApiEndpoint => globalConfiguration.get('notificationApiEndpoint');
+  String get notificationApiEndpoint =>
+      globalConfiguration.get('notificationApiEndpoint');
 
   String get clientId => globalConfiguration.get('clientId');
 

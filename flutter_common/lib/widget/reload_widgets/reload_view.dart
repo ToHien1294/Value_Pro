@@ -22,8 +22,7 @@ class ReloadView extends StatelessWidget {
       _child = child;
     }
 
-    if (_child == null) {
-      _child = SingleChildScrollView(
+    _child ??= SingleChildScrollView(
         child: ConstrainedBox(
           constraints: BoxConstraints(
             minHeight: MediaQuery.of(context).size.height,
@@ -34,11 +33,9 @@ class ReloadView extends StatelessWidget {
           ),
         ),
       );
-    }
 
     return RefreshIndicator(
       displacement: displacement ?? 0.0,
-      child: _child,
       onRefresh: () async {
         final dt1 = DateTime.now();
         if (onRefresh != null) await onRefresh();
@@ -47,6 +44,7 @@ class ReloadView extends StatelessWidget {
           await Future.delayed(const Duration(milliseconds: 200));
         }
       },
+      child: _child,
     );
   }
 }

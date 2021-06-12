@@ -110,9 +110,9 @@ class _DateTimeInputAreaState extends State<DateTimeInputArea> {
   _selectDate(BuildContext context) async {
     _displayInitialValue = true;
 
-    DateTime newSelectedDate = await showDatePicker(
+    final newSelectedDate = await showDatePicker(
       context: context,
-      initialDate: _selectedDate != null ? _selectedDate : (widget.initialDate ?? widget.firstDate),
+      initialDate: _selectedDate ?? (widget.initialDate ?? widget.firstDate),
       firstDate: widget.firstDate,
       lastDate: widget.lastDate ?? DateTime(_defaultLastDate),
       currentDate: widget.currentDate ?? DateTime.now(),

@@ -10,7 +10,7 @@ class BlocProvider<T> extends InheritedWidget {
     Key key,
     Widget child,
     @required this.create,
-    bool updateShouldNotify(T previous, T current),
+    bool Function(T previous, T current) updateShouldNotify,
   })  : assert(create != null),
         _updateShouldNotify = updateShouldNotify ?? _notEquals,
         super(key: key, child: child);
@@ -36,7 +36,9 @@ class BlocProvider<T> extends InheritedWidget {
 
   static Type _typeOf<T>() => T;
 
-  BlocProvider<T> copyWith(Widget child) => BlocProvider<T>(child: child, create: create, key: key, updateShouldNotify: _updateShouldNotify);
+  BlocProvider<T> copyWith(Widget child) => BlocProvider<T>( create: create, key: key, updateShouldNotify: _updateShouldNotify)@override
+  child: @override
+  child,;
 }
 
 class BlocProviderError extends Error {
@@ -61,7 +63,7 @@ class MultiBlocProvider extends StatelessWidget {
         super(key: key);
 
   @override
-  Widget build(BuildContext context) => providers.reversed.fold(child, (Widget widget, BlocProvider<dynamic> provider) => provider.copyWith(widget));
+  Widget build(BuildContext context) => providers.reversed.fold(child, (widget, provider) => provider.copyWith(widget));
 }
 
 class Consumer<T> extends StatelessWidget {

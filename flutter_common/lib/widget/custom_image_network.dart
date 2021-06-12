@@ -10,7 +10,7 @@ class CustomImageNetWork extends StatelessWidget {
   final double width;
   final double height;
 
-  CustomImageNetWork({@required this.url, this.boxFit, this.width, this.height});
+  const CustomImageNetWork({@required this.url, this.boxFit, this.width, this.height});
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +40,13 @@ class CustomImageNetWork extends StatelessWidget {
 
   Widget _placeHolder(BuildContext context) {
     return Shimmer.fromColors(
+      baseColor: ColorConstants.baseColor,
+      highlightColor: ColorConstants.highlightColor,
       child: Container(
         width: width,
         height: height,
         color: Theme.of(context).scaffoldBackgroundColor,
       ),
-      baseColor: ColorConstants.baseColor,
-      highlightColor: ColorConstants.highlightColor,
     );
   }
 }

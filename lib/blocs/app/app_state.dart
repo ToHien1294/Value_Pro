@@ -9,6 +9,7 @@ class AppState extends Equatable {
   final bool success;
   final String error;
 
+  // ignore: sort_constructors_first
   AppState({
     AppState state,
     String appTheme,

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'app.dart';
 import 'dependencies/app_dependencies.dart';
 
+// ignore: avoid_void_async
 void main() async {
 //  LicenseRegistry.addLicense(() async* {
 //    final license = await rootBundle.loadString('assets/licenses/OFL_SFPro.txt');
@@ -15,9 +15,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppDependencies.init();
   await SharedPreferences.getInstance();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
   /// Firebase notification
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }

@@ -36,7 +36,7 @@ abstract class BaseBloc<T extends dynamic> {
     _waitingController?.sink?.add(waiting);
   }
 
-  void emitListener(dynamic payload) {
+  void emitListener(payload) {
     if (_listenerController?.isClosed ?? true) return;
     _listenerController?.sink?.add(payload);
   }
@@ -53,5 +53,5 @@ abstract class BaseBloc<T extends dynamic> {
   @mustCallSuper
   void onInactive() {}
 
-  void emit(dynamic state) => _controller?.sink?.add(state);
+  void emit(state) => _controller?.sink?.add(state);
 }

@@ -1,33 +1,33 @@
 const List<int> daysInMonths = <int>[31, -1, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
 extension DateTimeExtension on DateTime {
-  DateTime get date => DateTime(this.year, this.month, this.day);
+  DateTime get date => DateTime(year, month, day);
 
   bool operator >=(DateTime other) {
     if (this == null || other == null) return false;
-    var now = this.toUtc().millisecondsSinceEpoch;
-    var otherUtc = other.toUtc().millisecondsSinceEpoch;
+    final now = toUtc().millisecondsSinceEpoch;
+    final otherUtc = other.toUtc().millisecondsSinceEpoch;
     return now >= otherUtc;
   }
 
   bool operator >(DateTime other) {
     if (this == null || other == null) return false;
-    var now = this.toUtc().millisecondsSinceEpoch;
-    var otherUtc = other.toUtc().millisecondsSinceEpoch;
+    final now = toUtc().millisecondsSinceEpoch;
+    final otherUtc = other.toUtc().millisecondsSinceEpoch;
     return now > otherUtc;
   }
 
   bool operator <=(DateTime other) {
     if (this == null || other == null) return false;
-    var now = this.toUtc().millisecondsSinceEpoch;
-    var otherUtc = other.toUtc().millisecondsSinceEpoch;
+    final now = toUtc().millisecondsSinceEpoch;
+    final otherUtc = other.toUtc().millisecondsSinceEpoch;
     return now <= otherUtc;
   }
 
   bool operator <(DateTime other) {
     if (this == null || other == null) return false;
-    var now = this.toUtc().millisecondsSinceEpoch;
-    var otherUtc = other.toUtc().millisecondsSinceEpoch;
+    final now = toUtc().millisecondsSinceEpoch;
+    final otherUtc = other.toUtc().millisecondsSinceEpoch;
     return now < otherUtc;
   }
 
@@ -37,7 +37,7 @@ extension DateTimeExtension on DateTime {
 
   int get daysInMonth {
     if (month == DateTime.february) {
-      final bool isLeapYear = (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0);
+      final isLeapYear = (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0);
       if (isLeapYear) return 29;
       return 28;
     }
@@ -47,6 +47,6 @@ extension DateTimeExtension on DateTime {
   bool isSameDay(DateTime other) {
     if (this == null || other == null) return false;
 
-    return this.year == other.year && this.month == other.month && this.day == other.day;
+    return year == other.year && month == other.month && day == other.day;
   }
 }

@@ -39,7 +39,7 @@ abstract class BaseState<T extends StatefulWidget, B extends BaseBloc> extends S
       }
     });
 
-    bloc?.listenerStream?.listen((state) => blocListener(state));
+    bloc?.listenerStream?.listen(blocListener);
   }
 
   @override
@@ -100,7 +100,7 @@ abstract class BaseState<T extends StatefulWidget, B extends BaseBloc> extends S
 
   Widget buildFloatButton(BuildContext context) => null;
 
-  void blocListener(dynamic state) {}
+  void blocListener(state) {}
 
   @override
   void dispose() {

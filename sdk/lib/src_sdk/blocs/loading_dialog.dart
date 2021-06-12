@@ -11,11 +11,11 @@ class LoadingDialog extends StatelessWidget {
     }
 
     isOpen = true;
-    showDialog(
+    await showDialog(
         context: context,
         barrierDismissible: false,
         useRootNavigator: true,
-        builder: (BuildContext context) => LoadingDialog());
+        builder: (context) => LoadingDialog());
   }
 
   static void close(BuildContext context) {
@@ -31,7 +31,7 @@ class LoadingDialog extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Dialog(
-        elevation: 0.0,
+        elevation: 0,
         backgroundColor: Colors.transparent,
         child: Center(
           child: SpinKitRing(

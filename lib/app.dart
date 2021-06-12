@@ -14,7 +14,7 @@ bool isLogout = false;
 Environment environment = Environment.dev;
 
 class MyApp extends StatefulWidget {
-  MyApp({Key key}) : super(key: key);
+  const MyApp({Key key}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -31,7 +31,8 @@ class _MyAppState extends State<MyApp> {
     ]);
     appBloc?.listenerStream?.listen((state) {
       if (state != null && state is bool && state) {
-        navigationKey?.currentState?.pushNamedAndRemoveUntil(Routes.home, (route) => false);
+        navigationKey?.currentState
+            ?.pushNamedAndRemoveUntil(Routes.home, (route) => false);
       }
     });
   }
@@ -67,11 +68,13 @@ class _MyAppState extends State<MyApp> {
       navigatorKey: navigationKey,
       title: 'Value Pro',
       debugShowCheckedModeBanner: false,
-      theme: ThemeBuilder.build(context, AppTheme.light.value, fontFamily: state?.fontFamily),
-      darkTheme: ThemeBuilder.build(context, AppTheme.dark.value, fontFamily: state?.fontFamily),
+      theme: ThemeBuilder.build(context, AppTheme.light.value,
+          fontFamily: state?.fontFamily),
+      darkTheme: ThemeBuilder.build(context, AppTheme.dark.value,
+          fontFamily: state?.fontFamily),
       themeMode: ThemeBuilder.themeMode(state?.appTheme),
       initialRoute: Routes.home,
-      onGenerateRoute: (settings) => Routes.getRoute(settings),
+      onGenerateRoute: Routes.getRoute,
       supportedLocales: AppLocalizations.delegate.supportedLocales,
       localizationsDelegates: [
         AppLocalizations.delegate,

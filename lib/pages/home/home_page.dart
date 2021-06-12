@@ -33,7 +33,7 @@ class _HomePageState extends BaseState<HomePage, BaseBloc> {
   Widget buildAppBar(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      title: Text(" localization,"),
+      title: const Text(' localization,'),
     );
   }
 
