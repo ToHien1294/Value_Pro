@@ -24,12 +24,14 @@ class AppLocalizations implements WidgetsLocalizations {
   final RegExp _replaceArgRegex = RegExp(r'{}');
   final Locale locale;
 
-  static Future<Null> setNewLanguage([String localeName, bool saveInPrefs = false]) async {
+  static Future<Null> setNewLanguage(
+      [String localeName, bool saveInPrefs = false]) async {
     if (localeName == '') {
       localeName = LocaleCodes.vi;
     }
 
-    final var jsonContent = await rootBundle.loadString('assets/locale/i18n_$localeName.json');
+    final jsonContent =
+        await rootBundle.loadString('assets/locale/i18n_$localeName.json');
     localizedValues = json.decode(jsonContent);
     _cache.clear();
 
@@ -97,7 +99,8 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   Locale _currentLocale;
 
   @override
-  bool isSupported(Locale locale) => locale != null && supportedLocales.contains(locale);
+  bool isSupported(Locale locale) =>
+      locale != null && supportedLocales.contains(locale);
 
   @override
   Future<AppLocalizations> load(Locale locale) {

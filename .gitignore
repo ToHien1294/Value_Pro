@@ -32,6 +32,7 @@
 /build/
 android/fastlane/
 /ios/
+build/
 
 # Android related
 **/android/**/gradle-wrapper.jar

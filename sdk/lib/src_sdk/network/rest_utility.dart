@@ -28,7 +28,7 @@ class RestUtility implements IRestUtility {
     int receiveTimeout = 30000,
     int sendTimeout = 30000,
   }) {
-    final var _options = BaseOptions(
+    final _options = BaseOptions(
       connectTimeout: connectTimeout,
       receiveTimeout: receiveTimeout,
       sendTimeout: sendTimeout,
@@ -98,7 +98,10 @@ enum ErrorCode {
 }
 
 enum Method {
-  POST, PUT, DELETE, GET,
+  POST,
+  PUT,
+  DELETE,
+  GET,
 }
 
 extension MethodExtensions on Method {

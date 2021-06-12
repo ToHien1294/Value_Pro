@@ -5,7 +5,7 @@ extension IterableExtension<E> on Iterable<E> {
 
   E firstOrDefault([bool Function(E element) func]) {
     if (func == null) {
-      final var it = iterator;
+      final it = iterator;
       if (!it.moveNext()) {
         return null;
       }

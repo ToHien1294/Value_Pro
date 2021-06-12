@@ -1,4 +1,3 @@
-
 _copyValues<K, V>(
     Map<K, V> from, Map<K, V> to, bool recursive, bool acceptNull) {
   for (var key in from.keys) {
@@ -15,7 +14,7 @@ _copyValues<K, V>(
 
 Map<K, V> mergeMap<K, V>(Iterable<Map<K, V>> maps,
     {bool recursive = true, bool acceptNull = false}) {
-  final var result = <K, V>{};
+  final result = <K, V>{};
   maps.forEach((map) {
     if (map != null) _copyValues(map, result, recursive, acceptNull);
   });

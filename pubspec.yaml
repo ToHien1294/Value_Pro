@@ -45,11 +45,8 @@ flutter:
   assets:
     - assets/
     - assets/cfg/
-    - assets/images/png/
-    - assets/images/svg/
 #     - assets/licenses/
     - assets/locale/
-    - assets/images/
     - assets/flags/
 
 
