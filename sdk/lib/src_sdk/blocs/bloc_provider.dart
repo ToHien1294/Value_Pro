@@ -16,11 +16,7 @@ class BlocProvider<T> extends InheritedWidget {
         super(key: key, child: child);
 
   static T of<T>(BuildContext context, {bool listen = true}) {
-    final BlocProvider<T> provider = listen
-        ? context.dependOnInheritedWidgetOfExactType<BlocProvider<T>>()
-        : context
-            .getElementForInheritedWidgetOfExactType<BlocProvider<T>>()
-            ?.widget;
+    final BlocProvider<T> provider = listen ? context.dependOnInheritedWidgetOfExactType<BlocProvider<T>>() : context.getElementForInheritedWidgetOfExactType<BlocProvider<T>>()?.widget;
     if (provider == null) {
       throw BlocProviderError(_typeOf<BlocProvider<T>>());
     }
@@ -28,8 +24,7 @@ class BlocProvider<T> extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(BlocProvider<T> old) =>
-      _updateShouldNotify(old.create, create);
+  bool updateShouldNotify(BlocProvider<T> old) => _updateShouldNotify(old.create, create);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -41,11 +36,7 @@ class BlocProvider<T> extends InheritedWidget {
 
   static Type _typeOf<T>() => T;
 
-  BlocProvider<T> copyWith(Widget child) => BlocProvider<T>(
-      child: child,
-      create: create,
-      key: key,
-      updateShouldNotify: _updateShouldNotify);
+  BlocProvider<T> copyWith(Widget child) => BlocProvider<T>(child: child, create: create, key: key, updateShouldNotify: _updateShouldNotify);
 }
 
 class BlocProviderError extends Error {
@@ -64,17 +55,13 @@ class MultiBlocProvider extends StatelessWidget {
 
   final Widget child;
 
-  const MultiBlocProvider(
-      {Key key, @required this.providers, @required this.child})
+  const MultiBlocProvider({Key key, @required this.providers, @required this.child})
       : assert(providers != null),
         assert(child != null),
         super(key: key);
 
   @override
-  Widget build(BuildContext context) => providers.reversed.fold(
-      child,
-      (Widget widget, BlocProvider<dynamic> provider) =>
-          provider.copyWith(widget));
+  Widget build(BuildContext context) => providers.reversed.fold(child, (Widget widget, BlocProvider<dynamic> provider) => provider.copyWith(widget));
 }
 
 class Consumer<T> extends StatelessWidget {
@@ -87,8 +74,7 @@ class Consumer<T> extends StatelessWidget {
         super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      builder(context, BlocProvider.of<T>(context));
+  Widget build(BuildContext context) => builder(context, BlocProvider.of<T>(context));
 }
 
 class Consumer2<A, B> extends StatelessWidget {
@@ -101,8 +87,7 @@ class Consumer2<A, B> extends StatelessWidget {
         super(key: key);
 
   @override
-  Widget build(BuildContext context) => builder(
-      context, BlocProvider.of<A>(context), BlocProvider.of<B>(context));
+  Widget build(BuildContext context) => builder(context, BlocProvider.of<A>(context), BlocProvider.of<B>(context));
 }
 
 class Consumer3<A, B, C> extends StatelessWidget {
@@ -163,8 +148,7 @@ class Consumer5<A, B, C, D, E> extends StatelessWidget {
 }
 
 class Consumer6<A, B, C, D, E, F> extends StatelessWidget {
-  final Widget Function(BuildContext context, A a, B b, C c, D d, E e, F f)
-      builder;
+  final Widget Function(BuildContext context, A a, B b, C c, D d, E e, F f) builder;
 
   const Consumer6({
     Key key,
@@ -185,8 +169,7 @@ class Consumer6<A, B, C, D, E, F> extends StatelessWidget {
 }
 
 class Consumer7<A, B, C, D, E, F, G> extends StatelessWidget {
-  final Widget Function(BuildContext context, A a, B b, C c, D d, E e, F f, G g)
-      builder;
+  final Widget Function(BuildContext context, A a, B b, C c, D d, E e, F f, G g) builder;
 
   const Consumer7({
     Key key,
@@ -208,8 +191,7 @@ class Consumer7<A, B, C, D, E, F, G> extends StatelessWidget {
 }
 
 class Consumer8<A, B, C, D, E, F, G, H> extends StatelessWidget {
-  final Widget Function(
-      BuildContext context, A a, B b, C c, D d, E e, F f, G g, H h) builder;
+  final Widget Function(BuildContext context, A a, B b, C c, D d, E e, F f, G g, H h) builder;
 
   const Consumer8({
     Key key,
@@ -232,9 +214,7 @@ class Consumer8<A, B, C, D, E, F, G, H> extends StatelessWidget {
 }
 
 class Consumer9<A, B, C, D, E, F, G, H, I> extends StatelessWidget {
-  final Widget Function(
-          BuildContext context, A a, B b, C c, D d, E e, F f, G g, H h, I i)
-      builder;
+  final Widget Function(BuildContext context, A a, B b, C c, D d, E e, F f, G g, H h, I i) builder;
 
   const Consumer9({
     Key key,

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
 extension TextStyleExtension on TextStyle {
@@ -20,6 +20,12 @@ extension TextStyleExtension on TextStyle {
 
   TextStyle get normal => fontStyle(FontStyle.normal);
 
+  TextStyle get letterSpacing0p6 => letterSpa(0.6);
+
+  TextStyle get letterSpacing0p2 => letterSpa(0.2);
+
+  TextStyle get heightLine1p2 => heightLine(1.2);
+
   TextStyle size(double size) => copyWith(fontSize: size);
 
   TextStyle textColor(Color v) => copyWith(color: v);
@@ -31,4 +37,9 @@ extension TextStyleExtension on TextStyle {
   TextStyle setDecoration(TextDecoration v) => copyWith(decoration: v);
 
   TextStyle fontFamilies(String v) => copyWith(fontFamily: v);
+
+  TextStyle letterSpa(double v) => copyWith(letterSpacing: v);
+
+  TextStyle heightLine(double v) => copyWith(height: v);
 }
+

@@ -32,6 +32,8 @@ dependencies:
   path_provider: ^2.0.0
   visibility_detector: ^0.1.5
   equatable: ^2.0.0
+  flutter_svg: ^0.22.0
+  flutter_xlider: ^3.4.0
 
 dev_dependencies:
   flutter_test:
@@ -45,8 +47,11 @@ flutter:
   assets:
     - assets/
     - assets/cfg/
+    - assets/images/png/
+    - assets/images/svg/
 #     - assets/licenses/
     - assets/locale/
+    - assets/images/
     - assets/flags/
 
 

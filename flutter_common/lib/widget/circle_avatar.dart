@@ -9,7 +9,7 @@ class CircleAvatarWidget extends StatefulWidget {
   final AssetImage errorAssetImage;
   final bool showDebugLog;
 
-  const CircleAvatarWidget(
+  CircleAvatarWidget(
     this.url, {
     Key key,
     @required this.errorAssetImage,
@@ -51,7 +51,7 @@ class _CircleAvatarWidgetState extends State<CircleAvatarWidget> {
             setState(() => _image = widget.errorAssetImage);
           },
         ),
-        border: Border.all(
+        border: new Border.all(
           color: widget.borderColor ?? _theme.primaryColor,
           width: widget.borderWidth ?? 2.0,
         ),

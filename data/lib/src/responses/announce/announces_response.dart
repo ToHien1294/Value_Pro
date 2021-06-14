@@ -1,3 +1,4 @@
+
 import '../../../data.dart';
 
 class AnnouncesResponse {
@@ -11,16 +12,7 @@ class AnnouncesResponse {
   final bool inApp;
   final List<dynamic> apartmentIds;
 
-  AnnouncesResponse(
-      {this.id,
-      this.title,
-      this.content,
-      this.dateCreate,
-      this.publishDate,
-      this.buildingId,
-      this.blockId,
-      this.inApp,
-      this.apartmentIds});
+  AnnouncesResponse({this.id, this.title, this.content, this.dateCreate, this.publishDate, this.buildingId, this.blockId, this.inApp, this.apartmentIds});
 
   factory AnnouncesResponse.fromJson(Map<String, dynamic> json) {
     return AnnouncesResponse(

@@ -25,7 +25,7 @@ class DeviceInfo {
         final androidInfo = await deviceInfoPlugin.androidInfo;
         identifier = androidInfo.androidId; //UUID for Android
       } else if (Platform.isIOS) {
-        final data = await deviceInfoPlugin.iosInfo;
+        var data = await deviceInfoPlugin.iosInfo;
         identifier = data.identifierForVendor; //UUID for iOS
       }
     } catch (ex) {}

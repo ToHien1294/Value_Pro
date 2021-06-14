@@ -1,30 +1,30 @@
 extension IterableExtension<E> on Iterable<E> {
-  bool get isNullOrEmpty => this == null || isEmpty;
+  bool get isNullOrEmpty => this == null || this.isEmpty;
 
   bool get isNotNullOrEmpty => !isNullOrEmpty;
 
-  E firstOrDefault([bool Function(E element) func]) {
+  E firstOrDefault([bool func(E element)]) {
     if (func == null) {
-      final it = iterator;
+      Iterator<E> it = iterator;
       if (!it.moveNext()) {
         return null;
       }
       return it.current;
     }
-    for (var element in this) {
+    for (E element in this) {
       if (func(element)) return element;
     }
     return null;
   }
 
-  E lastOrDefault([bool Function(E element) func]) {
+  E lastOrDefault([bool func(E element)]) {
     if (func == null) {
-      if (isNotNullOrEmpty) return last;
+      if (this.isNotNullOrEmpty) return this.last;
       return null;
     }
     E result;
-    var foundMatching = false;
-    for (var element in this) {
+    bool foundMatching = false;
+    for (E element in this) {
       if (func(element)) {
         result = element;
         foundMatching = true;
@@ -34,8 +34,8 @@ extension IterableExtension<E> on Iterable<E> {
     return null;
   }
 
-  dynamic foldLeft(val, func) {
-    forEach((entry) => val = func(val, entry));
+  dynamic foldLeft(dynamic val, func) {
+    this.forEach((entry) => val = func(val, entry));
     return val;
   }
 }

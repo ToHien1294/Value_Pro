@@ -7,7 +7,8 @@ import 'base_bloc.dart';
 import 'loading_dialog.dart';
 import 'loading_widget.dart';
 
-abstract class BaseState<T extends StatefulWidget, B extends BaseBloc> extends State<T> with WidgetsBindingObserver {
+abstract class BaseState<T extends StatefulWidget, B extends BaseBloc>
+    extends State<T> with WidgetsBindingObserver {
   final spinKitSize = 20.0;
 
   B get bloc;
@@ -39,7 +40,7 @@ abstract class BaseState<T extends StatefulWidget, B extends BaseBloc> extends S
       }
     });
 
-    bloc?.listenerStream?.listen(blocListener);
+    bloc?.listenerStream?.listen((state) => blocListener(state));
   }
 
   @override
@@ -73,8 +74,15 @@ abstract class BaseState<T extends StatefulWidget, B extends BaseBloc> extends S
           )
         : buildContent(context);
 
-    return isContentLayout == true
-        ? _body
+    return isContentLayout == false
+        ? GestureDetector(
+            onTap: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            child: Scaffold(
+              body: _body,
+            ),
+          )
         : GestureDetector(
             onTap: () {
               FocusScope.of(context).requestFocus(FocusNode());
@@ -100,7 +108,11 @@ abstract class BaseState<T extends StatefulWidget, B extends BaseBloc> extends S
 
   Widget buildFloatButton(BuildContext context) => null;
 
-  void blocListener(state) {}
+  void blocListener(dynamic state) {}
+
+  void nextPageBottomToTop(Widget widget) async {
+    await Navigator.of(context).push(_createRoute(widget));
+  }
 
   @override
   void dispose() {
@@ -155,4 +167,22 @@ abstract class BaseState<T extends StatefulWidget, B extends BaseBloc> extends S
       bloc?.onInactive();
     }
   }
+}
+
+Route _createRoute(Widget nextPage) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => nextPage,
+    transitionDuration:const Duration(milliseconds: 1000),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      var begin = Offset(0.0, 1.0);
+      var end = Offset.zero;
+      var curve = Curves.ease;
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
 }

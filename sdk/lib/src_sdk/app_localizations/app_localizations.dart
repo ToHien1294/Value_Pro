@@ -10,7 +10,7 @@ class AppLocalizations implements WidgetsLocalizations {
   static AppLocalizationsDelegate delegate = AppLocalizationsDelegate._();
 
   static Map<dynamic, dynamic> localizedValues = {};
-  static final Map<String, String> _cache = {};
+  static Map<String, String> _cache = {};
 
   static Future<AppLocalizations> load(Locale locale) async {
     await setNewLanguage(locale.languageCode);
@@ -24,14 +24,12 @@ class AppLocalizations implements WidgetsLocalizations {
   final RegExp _replaceArgRegex = RegExp(r'{}');
   final Locale locale;
 
-  static Future<Null> setNewLanguage(
-      [String localeName, bool saveInPrefs = false]) async {
+  static Future<Null> setNewLanguage([String localeName, bool saveInPrefs = false]) async {
     if (localeName == '') {
       localeName = LocaleCodes.vi;
     }
 
-    final jsonContent =
-        await rootBundle.loadString('assets/locale/i18n_$localeName.json');
+    String jsonContent = await rootBundle.loadString("assets/locale/i18n_$localeName.json");
     localizedValues = json.decode(jsonContent);
     _cache.clear();
 
@@ -44,21 +42,21 @@ class AppLocalizations implements WidgetsLocalizations {
   AppLocalizations(this.locale);
 
   String text(String key, {List<dynamic> args}) {
-    var string = '** $key not found';
+    String string = '** $key not found';
 
     if (localizedValues != null) {
       if (_cache[key] != null && args == null) {
         string = _cache[key];
       } else {
-        var found = true;
-        var _values = localizedValues;
-        final _keyParts = key.split('.');
-        final _keyPartsLen = _keyParts.length;
-        var index = 0;
-        final lastIndex = _keyPartsLen - 1;
+        bool found = true;
+        Map<dynamic, dynamic> _values = localizedValues;
+        List<String> _keyParts = key.split('.');
+        int _keyPartsLen = _keyParts.length;
+        int index = 0;
+        int lastIndex = _keyPartsLen - 1;
 
         while (index < _keyPartsLen && found) {
-          final value = _values[_keyParts[index]];
+          var value = _values[_keyParts[index]];
 
           if (value == null) {
             found = false;
@@ -99,8 +97,7 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   Locale _currentLocale;
 
   @override
-  bool isSupported(Locale locale) =>
-      locale != null && supportedLocales.contains(locale);
+  bool isSupported(Locale locale) => locale != null && supportedLocales.contains(locale);
 
   @override
   Future<AppLocalizations> load(Locale locale) {
@@ -121,7 +118,7 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   }
 
   LocaleListResolutionCallback listResolution({Locale fallback}) {
-    return (locales, supported) {
+    return (List<Locale> locales, Iterable<Locale> supported) {
       if (locales == null || locales.isEmpty) {
         return fallback ?? supportedLocales.first;
       } else {
@@ -131,7 +128,7 @@ class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   }
 
   LocaleResolutionCallback resolution({Locale fallback}) {
-    return (locale, supported) {
+    return (Locale locale, Iterable<Locale> supported) {
       return _resolve(locale, fallback, supported);
     };
   }

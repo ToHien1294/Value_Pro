@@ -70,7 +70,7 @@ class ReloadListView extends StatelessWidget {
       );
     }
 
-    final Widget _child = NotificationListener(
+    Widget _child = NotificationListener(
       onNotification: _onNotification,
       child: ListView.separated(
         controller: controller,
@@ -79,18 +79,20 @@ class ReloadListView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             itemBuilder(context, index),
-            if (index == itemCount - 1 && (isLoadingMore ?? false)) loadingIndicatorBuilder != null
+            index == itemCount - 1 && (isLoadingMore ?? false)
+                ? (loadingIndicatorBuilder != null
                     ? loadingIndicatorBuilder(context, index)
                     : Container(
-                        padding: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8.0),
                         alignment: Alignment.center,
-                        child: SpinKitThreeBounce(color: theme.primaryColor, size: 16),
-                      ) else Container(),
+                        child: SpinKitThreeBounce(color: theme.primaryColor, size: 16.0),
+                      ))
+                : Container(),
           ],
         ),
         itemCount: itemCount ?? 0,
         separatorBuilder: separatorBuilder ?? (_, __) => Container(),
-        padding: (padding ?? EdgeInsets.zero).add(EdgeInsets.only(bottom: 32)),
+        padding: (padding ?? EdgeInsets.zero).add(EdgeInsets.only(bottom: 32.0)),
         physics: physics,
         cacheExtent: screenSize.height * (cacheScreenQty ?? 3),
       ),

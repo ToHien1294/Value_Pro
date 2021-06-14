@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:sdk/flutter_sdk.dart';
-import 'package:flutter_common/common.dart';
 
 import 'blocs/blocs.dart';
 import 'enums.dart';
@@ -14,7 +13,7 @@ bool isLogout = false;
 Environment environment = Environment.dev;
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key key}) : super(key: key);
+  MyApp({Key key}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -31,8 +30,7 @@ class _MyAppState extends State<MyApp> {
     ]);
     appBloc?.listenerStream?.listen((state) {
       if (state != null && state is bool && state) {
-        navigationKey?.currentState
-            ?.pushNamedAndRemoveUntil(Routes.home, (route) => false);
+        navigationKey?.currentState?.pushNamedAndRemoveUntil(Routes.homePage, (route) => false);
       }
     });
   }
@@ -68,13 +66,11 @@ class _MyAppState extends State<MyApp> {
       navigatorKey: navigationKey,
       title: 'Value Pro',
       debugShowCheckedModeBanner: false,
-      theme: ThemeBuilder.build(context, AppTheme.light.value,
-          fontFamily: state?.fontFamily),
-      darkTheme: ThemeBuilder.build(context, AppTheme.dark.value,
-          fontFamily: state?.fontFamily),
+      theme: ThemeBuilder.build(context, AppTheme.light.value, fontFamily: state?.fontFamily),
+      darkTheme: ThemeBuilder.build(context, AppTheme.dark.value, fontFamily: state?.fontFamily),
       themeMode: ThemeBuilder.themeMode(state?.appTheme),
-      initialRoute: Routes.home,
-      onGenerateRoute: Routes.getRoute,
+      initialRoute: Routes.splashPage,
+      onGenerateRoute: (settings) => Routes.getRoute(settings),
       supportedLocales: AppLocalizations.delegate.supportedLocales,
       localizationsDelegates: [
         AppLocalizations.delegate,

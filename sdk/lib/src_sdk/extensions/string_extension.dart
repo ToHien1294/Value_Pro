@@ -3,12 +3,12 @@ import '../utility/utility.dart';
 import '../constants.dart';
 
 extension StringExtension on String {
-  static final RegExp _replaceArgRegex = RegExp(r'{}');
-  bool get isNullOrEmpty => this == null || isEmpty;
+  static RegExp _replaceArgRegex = RegExp(r'{}');
+  bool get isNullOrEmpty => this == null || this.isEmpty;
 
   bool get isNotNullOrEmpty => !isNullOrEmpty;
 
-  bool get isNullOrWhiteSpace => isNullOrEmpty || trim().isEmpty;
+  bool get isNullOrWhiteSpace => this.isNullOrEmpty || this.trim().isEmpty;
 
   String get titleCase => StringUtils(this).titleCase;
 
@@ -30,16 +30,16 @@ extension StringExtension on String {
   }
 
   String get unSign {
-    var result = this ?? '';
+    String result = this ?? '';
     if (result is String) {
-      for (var i = 0; i < _vietnamese.length; i++) {
+      for (int i = 0; i < _vietnamese.length; i++) {
         result = result.replaceAll(_vietnameseRegex[i], _vietnamese[i]);
       }
     }
     return result;
   }
 
-  String get unSignLower => unSign.toUpperCase();
+  String get unSignLower => this.unSign.toUpperCase();
 
   String hyphenFormat(String str) => '$this ${Constants.hyphen} $str'.trim();
 
@@ -51,12 +51,12 @@ extension StringExtension on String {
 
   double toDouble({double defaultValue = 0.0}) => double.tryParse(this) ?? defaultValue;
 
-  bool toBool() => trim().toLowerCase() == 'true' || trim().toLowerCase() == '1';
+  bool toBool() => this.trim().toLowerCase() == 'true' || this.trim().toLowerCase() == '1';
 
   String arguments(List<dynamic> args) {
     if (args == null || args.isEmpty || this == null) return this;
 
-    var res = this;
+    String res = this;
 
     args.forEach((value) => res = res.replaceFirst(_replaceArgRegex, '$value'));
 
@@ -97,9 +97,9 @@ class StringUtils {
 
   String get titleCase => _getTitleCase(separator: ' ');
 
-  String _getTitleCase({String separator = ''}) {
-    if (_words == null) return '';
-    final words = _words.map(_upperCaseFirstLetter).toList();
+  String _getTitleCase({String separator: ''}) {
+    if (this._words == null) return '';
+    final words = this._words.map(_upperCaseFirstLetter).toList();
     return words.join(separator);
   }
 

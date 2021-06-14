@@ -4,10 +4,10 @@ import '../constants.dart';
 
 extension DoubleExtensions on double {
   String toHoursMinutes() {
-    final hour = toInt();
-    final minute = ((this - hour) * 60).toInt();
-    final duration = Duration(hours: hour, minutes: minute);
-    final twoDigitMinutes = _toTwoDigits(duration.inMinutes.remainder(60));
+    var hour = toInt();
+    var minute = ((this - hour) * 60).toInt();
+    var duration = Duration(hours: hour, minutes: minute);
+    String twoDigitMinutes = _toTwoDigits(duration.inMinutes.remainder(60));
     return '${duration.inHours}:$twoDigitMinutes';
   }
 
@@ -17,12 +17,12 @@ extension DoubleExtensions on double {
   }
 
   String toStringWithDot() {
-    final formatter = NumberFormat(Constants.decimalFormat);
+    final formatter = new NumberFormat(Constants.decimalFormat);
     return formatter.format(this);
   }
 
   String toPercentage(int fractionDigits, bool showSymbol) {
-    final result = this * 100.0;
+    final double result = this * 100.0;
     return (result.toStringAsFixed(fractionDigits) + ' ${showSymbol ? Constants.percentage : ''}').trim();
   }
 
