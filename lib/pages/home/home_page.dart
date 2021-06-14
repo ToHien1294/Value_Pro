@@ -116,16 +116,12 @@ class _HomePageState extends BaseState<HomePage, BaseBloc> {
           Container(
             width: double.infinity,
             height: Dimens.size30,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-
-                  "assets/images/png/img_white_in_home.png",
-
-                ),
-                fit: BoxFit.fill
-              )
-            ),
+            decoration:const BoxDecoration(
+                image: DecorationImage(
+                    image:  AssetImage(
+                      'assets/images/png/img_white_in_home.png',
+                    ),
+                    fit: BoxFit.fill)),
           ),
           Expanded(
             child: Container(
@@ -134,30 +130,32 @@ class _HomePageState extends BaseState<HomePage, BaseBloc> {
               width: double.infinity,
               height: double.infinity,
               color: themeData.scaffoldBackgroundColor,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Recommend for you",
-                        style: themeData.textTheme.subtitle1.semiBold.size18
-                            .letterSpa(0.6)
-                            .textBlack,
-                      ),
-                      Text(
-                        "See all",
-                        style: themeData.textTheme.subtitle2.semiBold.size14
-                            .letterSpa(0.6)
-                            .textPrimary,
-                      ),
-                    ],
-                  ),
-                  UIHelper.verticalBox16,
-                  Expanded(
-                    child: ReloadListView(
+              child: SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Recommend For You",
+                          style: themeData.textTheme.subtitle1.semiBold.size18
+                              .letterSpa(0.6)
+                              .textBlack,
+                        ),
+                        Text(
+                          "See All",
+                          style: themeData.textTheme.subtitle2.semiBold.size14
+                              .letterSpa(0.6)
+                              .textPrimary,
+                        ),
+                      ],
+                    ),
+                    UIHelper.verticalBox16,
+                    ReloadListView(
                       shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: 5,
                       itemBuilder: (_, index) => ItemProperties(),
                       separatorBuilder: (_, __) => UIHelper.verticalBox20,
@@ -166,8 +164,8 @@ class _HomePageState extends BaseState<HomePage, BaseBloc> {
                       isLoadingMore: false,
                       noDataMessage: "",
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

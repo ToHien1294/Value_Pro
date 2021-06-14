@@ -52,6 +52,7 @@ class _SearchWidgetState extends State<SearchWidget> {
         });
       }
     });
+    // ignore: cascade_invocations
     controller.text=widget.text??'';
     super.didChangeDependencies();
   }
@@ -88,7 +89,9 @@ class _SearchWidgetState extends State<SearchWidget> {
                 style: _theme
                     .textTheme.subtitle1.regular.letterSpacing0p6.textBlack.size14,
                 controller: controller,
+                textCapitalization: TextCapitalization.sentences,
                 decoration: InputDecoration(
+
                   contentPadding: const EdgeInsets.symmetric(
                       vertical: Dimens.size12, horizontal: Dimens.size10),
                   hintText: widget.titleSearch,
@@ -106,7 +109,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                 decoration: BoxDecoration(
                                     color: MyColors.primaryBlack.withOpacity(0.38),
                                     shape: BoxShape.circle),
-                                child: Center(
+                                child: const Center(
                                     child: Icon(
                                   Icons.clear,
                                   color: MyColors.primaryWhite,
@@ -116,17 +119,18 @@ class _SearchWidgetState extends State<SearchWidget> {
                             )
                           : const SizedBox()
                       : const Center(),
+
                   hintStyle:
-                      TextStyle(color: MyColors.primaryBlack.withOpacity(0.6),letterSpacing: 0.6),
-                  enabledBorder: OutlineInputBorder(
+                      TextStyle(color: MyColors.primaryBlack.withOpacity(0.32),letterSpacing: 0.6),
+                  enabledBorder:  const OutlineInputBorder(
                     borderSide: BorderSide(width: 0, color: Colors.transparent),
                   ),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(width: 0, color: Colors.transparent),
                   ),
                 )),
           ),
-          widget.isIconSearch?SvgPicture.asset(SVGConstants.icSearchLocation,color: MyColors.primary,):UIHelper.emptyBox,
+          if (widget.isIconSearch) Image.asset(SVGConstants.icSearchLocation,color: MyColors.primary,) else UIHelper.emptyBox,
           const SizedBox(width: Dimens.size10),
         ],
       ),

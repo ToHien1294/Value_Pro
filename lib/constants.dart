@@ -58,7 +58,8 @@ class SVGConstants {
   static const String icHome = 'assets/images/svg/ic_home.svg';
   static const String icLocation = 'assets/images/svg/ic_location.svg';
   static const String icSearchLocation =
-      'assets/images/svg/ic_search_location.svg';
+      'assets/images/svg/ic_search_location.png';  static const String icSearch =
+      'assets/images/svg/ic_search.svg';
   static const String icNext = 'assets/images/svg/ic_next.svg';
   static const String icSlideRange = 'assets/images/svg/ic_slide_range.svg';
   static const String icPriceInM2 = 'assets/images/svg/ic_price_in_m2.svg';

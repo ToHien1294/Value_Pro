@@ -26,7 +26,7 @@ class ItemProperties extends StatelessWidget {
           width: double.infinity,
           child: Column(
             children: [
-              Expanded(
+              const Expanded(
                 flex: 5,
                 child: ContainerImageProperties(),
               ),
@@ -37,7 +37,7 @@ class ItemProperties extends StatelessWidget {
                       Dimens.size12, Dimens.size16, Dimens.size20),
                   width: double.infinity,
                   height: double.infinity,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(Dimens.size24),
                         bottomRight: Radius.circular(Dimens.size24)),
@@ -114,6 +114,7 @@ class ItemProperties extends StatelessWidget {
               child: Container(
                 width: double.infinity,
                 height: Dimens.size48,
+                padding: UIHelper.paddingAll4,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimens.size16),
                     border: Border.all(color: MyColors.borderGray)),
@@ -122,7 +123,7 @@ class ItemProperties extends StatelessWidget {
                   url:
                       "https://i.pinimg.com/originals/d4/f2/7b/d4f27b97e0739c979229bd32f12cf559.png",
                   boxFit: BoxFit.fill,
-                  borderRadius: BorderRadius.circular(Dimens.size16),
+                  borderRadius:BorderRadius.circular(Dimens.size16),
                 ),
               ),
             ),

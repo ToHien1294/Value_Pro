@@ -49,7 +49,7 @@ class _ContainerPriceRangeState extends State<ContainerPriceRange>
                     ),
                     UIHelper.horizontalBox8,
                     SvgPicture.asset(
-                      _isExpanded
+                      !_isExpanded
                           ? SVGConstants.icDropUp
                           : SVGConstants.icDropDown,
                       color: MyColors.primary,
@@ -162,8 +162,8 @@ class _ContainerPriceRangeState extends State<ContainerPriceRange>
           padding: const EdgeInsets.symmetric(
               horizontal: Dimens.size20, vertical: Dimens.size16),
           decoration: BoxDecoration(
-            color: MyColors.primary.withOpacity(0.2),
-            borderRadius: BorderRadius.only(
+            color: MyColors.primary.withOpacity(0.08),
+            borderRadius:const BorderRadius.only(
               topRight: Radius.circular(Dimens.size24),
               bottomLeft: Radius.circular(Dimens.size24),
               bottomRight: Radius.circular(Dimens.size24),

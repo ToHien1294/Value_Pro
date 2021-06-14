@@ -5,11 +5,11 @@ class MyColors {
   static const Color primaryTwo = Color(0xff6DC5A8);
   static const Color primaryWhite = Color(0xFFFFFFFF);
   static const Color primaryBlack = Color(0xff112F41);
-  static Color primaryBlack60 = Color(0xff112F41).withOpacity(0.6);
-  static Color primaryBlack38 = Color(0xff112F41).withOpacity(0.38);
-  static Color borderGray = Color(0xffE8E8E8);
-  static Color scaffoldBackgroundColor = Color(0xffFAFAFA);
-  static Color colorTextDarkGreen = Color(0xff1D5371);
+  static Color primaryBlack60 = const Color(0xff112F41).withOpacity(0.6);
+  static Color primaryBlack38 = const Color(0xff112F41).withOpacity(0.38);
+  static Color borderGray = const Color(0xffE8E8E8);
+  static Color scaffoldBackgroundColor = const Color(0xffFAFAFA);
+  static Color colorTextDarkGreen = const Color(0xff1D5371);
 
   static const Color primaryDark = Color(0xFF007bbd);
   static const Color primaryLight = Color(0xFF7adbff);

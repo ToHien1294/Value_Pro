@@ -24,7 +24,7 @@ class _ContainerOptionBuyRentState extends State<ContainerOptionBuyRent> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Dimens.size16),
             border: Border.all(
-              color: MyColors.primaryWhite.withOpacity(0.6),
+              color: MyColors.primaryWhite.withOpacity(0.38),
             ),
           ),
         ),

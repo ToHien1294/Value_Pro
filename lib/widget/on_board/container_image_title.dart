@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_common/common.dart';
 
-import '../../resources/resources.dart';
-import '../../extensions/extensions.dart';
 import '../../constants.dart';
+import '../../extensions/extensions.dart';
+import '../../resources/resources.dart';
 
 class ContainerImageTitle extends StatelessWidget {
   final String title;
@@ -24,8 +24,13 @@ class ContainerImageTitle extends StatelessWidget {
           child: Stack(
             children: [
               Container(
+                width: MediaQuery.of(context).size.width,
                 alignment: Alignment.bottomCenter,
-                child: Image.asset(ImageConstants.imgWareOnBoard),
+                child: Image.asset(
+                  ImageConstants.imgWareOnBoard,
+                  fit: BoxFit.fitWidth,
+                  width: MediaQuery.of(context).size.width,
+                ),
               ),
               Container(
                 child: Center(

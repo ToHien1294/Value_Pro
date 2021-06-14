@@ -62,7 +62,7 @@ class _NeedToBuyPageState extends BaseState<NeedToBuyPage, BaseBloc> {
                 .textTheme.caption.size14.regular.letterSpacing0p6.textWhite,
           ),
         ),
-        Positioned(
+        const Positioned(
           top: Dimens.size112,
           right: Dimens.size16,
           child: ContainerOptionBuyRent(),
@@ -76,6 +76,7 @@ class _NeedToBuyPageState extends BaseState<NeedToBuyPage, BaseBloc> {
           ),
           Expanded(
             child: PageView(
+              allowImplicitScrolling: true,
               controller: _pageController,
               physics: const NeverScrollableScrollPhysics(),
               children: [

@@ -28,6 +28,7 @@ class _StepIndicatorBuyState extends State<StepIndicatorBuy> {
       setState(() {
         _page = widget.pageController.page;
       });
+      print(_page);
     });
     super.didChangeDependencies();
   }
@@ -67,18 +68,16 @@ class _StepIndicatorBuyState extends State<StepIndicatorBuy> {
                   borderRadius: BorderRadius.circular(Dimens.size180),
                 ),
               ),
-              AnimatedPositioned(
-                  left: _page*Dimens.size28,
-                  top: 0,
-                  child: Container(
-                    width: Dimens.size28,
-                    height: Dimens.size4,
-                    decoration: BoxDecoration(
-                      color: MyColors.primaryWhite,
-                      borderRadius: BorderRadius.circular(Dimens.size180),
-                    ),
-                  ),
-                  duration: UIHelper.duration150),
+              AnimatedContainer(
+                duration: UIHelper.duration150,
+                width: Dimens.size56,
+                height: Dimens.size4,
+                margin: EdgeInsets.only(right: (1-_page)*Dimens.size28,),
+                decoration: BoxDecoration(
+                  color: MyColors.primaryWhite,
+                  borderRadius: BorderRadius.circular(Dimens.size180),
+                ),
+              ),
             ],
           ),
         ],

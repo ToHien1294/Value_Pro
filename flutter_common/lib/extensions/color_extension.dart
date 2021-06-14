@@ -8,15 +8,15 @@ extension ColorExtension on Color {
   Color get combineWhite90 => Color.alphaBlend(Colors.white.withOpacity(.9), this);
 
   MaterialColor get materialColor {
-    final Map<int, Color> swatch = {};
+    final swatch = <int, Color>{};
     final shadeValues = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
-    final primaryShade = 500;
+    const primaryShade = 500;
     shadeValues.forEach((shade) {
       if (shade <= primaryShade) {
-        final double _opacity = 1.0 - (1.0 / primaryShade.toDouble() * shade);
+        final _opacity = 1.0 - (1.0 / primaryShade.toDouble() * shade);
         swatch.putIfAbsent(shade, () => Color.alphaBlend(Colors.white.withOpacity(_opacity), this));
       } else {
-        final double _opacity = 1.0 / primaryShade.toDouble() * (shade - primaryShade);
+        final _opacity = 1.0 / primaryShade.toDouble() * (shade - primaryShade);
         swatch.putIfAbsent(shade, () => Color.alphaBlend(Colors.black.withOpacity(_opacity), this));
       }
     });

@@ -32,10 +32,11 @@ class _OnBroadPageState extends BaseState<OnBroadPage, BaseBloc> {
     super.didChangeDependencies();
 
     _pageController.addListener(() {
-      if (_pageController.page > 2.5)
+      if (_pageController.page > 2.5) {
         _visibleSkip.add(true);
-      else
+      } else {
         _visibleSkip.add(false);
+      }
     });
   }
 
@@ -47,8 +48,9 @@ class _OnBroadPageState extends BaseState<OnBroadPage, BaseBloc> {
 
   @override
   Widget buildContent(BuildContext context) {
-    return Scaffold(
-      body: Column(
+    return  Container(
+      width: double.infinity,
+      child: Column(
         children: [
           UIHelper.verticalBox32,
           Align(
@@ -81,25 +83,25 @@ class _OnBroadPageState extends BaseState<OnBroadPage, BaseBloc> {
                   assetImage: ImageConstants.imgOnBroadOne,
                   title: 'Những properties bán / cho thuê \n hấp dẫn',
                   content:
-                      'KimCasa giúp bạn tìm kiếm những properties \n phù hợp với mong muốn bạn',
+                  'KimCasa giúp bạn tìm kiếm những properties \n phù hợp với mong muốn bạn',
                 ),
                 ContainerImageTitle(
                   assetImage: ImageConstants.imgOnBroadTwo,
                   title: "Xem nhanh các properties \n đang quan tâm",
                   content:
-                      "Ứng dụng tự động gợi ý khi xuất hiện \n những properties mới phù hợp với nhu cầu bạn cần",
+                  "Ứng dụng tự động gợi ý khi xuất hiện \n những properties mới phù hợp với nhu cầu bạn cần",
                 ),
                 ContainerImageTitle(
                   assetImage: ImageConstants.imgOnBroadThree,
                   title: "So sánh để lựa chọn \n chính xác hơn",
                   content:
-                      "KimCasa giúp bạn so sánh các properties \n mà bạn đang cân nhắc chọn lựa",
+                  "KimCasa giúp bạn so sánh các properties \n mà bạn đang cân nhắc chọn lựa",
                 ),
                 ContainerImageTitle(
                   assetImage: ImageConstants.imgOnBroadFour,
                   title: "Ước tính nhanh chóng \n giá nhà & các loại phí",
                   content:
-                      "KimCasa giúp bạn so sánh các properties \n mà bạn đang cân nhắc chọn lựa",
+                  "KimCasa giúp bạn so sánh các properties \n mà bạn đang cân nhắc chọn lựa",
                 ),
               ],
             ),

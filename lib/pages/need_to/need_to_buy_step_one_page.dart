@@ -2,6 +2,7 @@ import 'package:data/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_common/common.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:keyboard_visibility/keyboard_visibility.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../widget/widget.dart';
@@ -22,23 +23,37 @@ class _NeedToBuyStepOnePageState extends State<NeedToBuyStepOnePage>
     with TickerProviderStateMixin {
   ThemeData _themeData;
 
-  BehaviorSubject<bool> _isSearch = BehaviorSubject<bool>.seeded(false);
+  final BehaviorSubject<bool> _isSearch = BehaviorSubject<bool>.seeded(false);
 
-  BehaviorSubject<bool> _isSelectLocation = BehaviorSubject<bool>.seeded(false);
+  final BehaviorSubject<bool> _isSelectLocation =
+      BehaviorSubject<bool>.seeded(false);
 
-  BehaviorSubject<double> _opacity = BehaviorSubject<double>.seeded(0);
+  final BehaviorSubject<bool> _isShowKeyBroad =
+      BehaviorSubject<bool>.seeded(false);
 
-  ScrollController _scrollController = ScrollController();
+  final BehaviorSubject<double> _opacity = BehaviorSubject<double>.seeded(0);
+
+  final ScrollController _scrollController = ScrollController();
+
+  final TextEditingController _locationController =
+  TextEditingController(text: "Manchester, Greater Manchester");
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(() {
-      if (_scrollController.offset > Dimens.size200)
+      if (_scrollController.offset > Dimens.size200) {
         _opacity.add(1);
-      else
-        _opacity.add(1 - Dimens.size100 / (_scrollController.offset + Dimens.size100));
+      } else {
+        _opacity.add(
+            1 - Dimens.size100 / (_scrollController.offset + Dimens.size100));
+      }
     });
+    KeyboardVisibilityNotification().addNewListener(
+      onChange: (visible) {
+        _isShowKeyBroad.add(visible);
+      },
+    );
   }
 
   @override
@@ -46,6 +61,7 @@ class _NeedToBuyStepOnePageState extends State<NeedToBuyStepOnePage>
     _isSearch.close();
     _isSelectLocation.close();
     _opacity.close();
+    _isShowKeyBroad.close();
     super.dispose();
   }
 
@@ -94,8 +110,8 @@ class _NeedToBuyStepOnePageState extends State<NeedToBuyStepOnePage>
                   width: Dimens.size60,
                   height: Dimens.size60,
                   decoration: BoxDecoration(
-                    color: MyColors.primaryWhite.withOpacity(0.92),
-                    borderRadius: BorderRadius.only(
+                    color: MyColors.primaryWhite.withOpacity(0.5),
+                    borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(Dimens.size16),
                       topLeft: Radius.circular(Dimens.size16),
                     ),
@@ -111,7 +127,7 @@ class _NeedToBuyStepOnePageState extends State<NeedToBuyStepOnePage>
                           color: Colors.grey.withOpacity(0.2),
                           spreadRadius: Dimens.size2,
                           blurRadius: Dimens.size4,
-                          offset: Offset(
+                          offset: const Offset(
                               0, Dimens.size2), // changes position of shadow
                         ),
                       ],
@@ -142,7 +158,7 @@ class _NeedToBuyStepOnePageState extends State<NeedToBuyStepOnePage>
           padding: UIHelper.horizontalEdgeInsets16,
           decoration: BoxDecoration(
             color: MyColors.primaryWhite.withOpacity(0.92),
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topRight: Radius.circular(Dimens.size24),
               topLeft: Radius.circular(Dimens.size24),
             ),
@@ -154,6 +170,7 @@ class _NeedToBuyStepOnePageState extends State<NeedToBuyStepOnePage>
                 UIHelper.verticalBox48,
                 SearchWidget(
                   "Your location",
+                  autoFocus: true,
                   onCancel: () {},
                   onSearch: (val) {
                     if (val != null && val != "")
@@ -223,9 +240,7 @@ class _NeedToBuyStepOnePageState extends State<NeedToBuyStepOnePage>
                                   "Your location",
                                   text: "Manchester, Greater Manchester",
                                   onCancel: () {},
-                                  onSearch: (val) {
-
-                                  },
+                                  onSearch: (val) {},
                                   isIconSearch: false,
                                 ),
                                 UIHelper.verticalBox24,
@@ -253,7 +268,14 @@ class _NeedToBuyStepOnePageState extends State<NeedToBuyStepOnePage>
                       );
                     }),
               ),
-              _buildBottomButton(),
+              StreamBuilder<bool>(
+                  stream: _isShowKeyBroad,
+                  initialData: false,
+                  builder: (context, snapshot) {
+                    return snapshot.data
+                        ? UIHelper.emptyBox
+                        : _buildBottomButton();
+                  }),
             ],
           ),
         ),
@@ -266,7 +288,7 @@ class _NeedToBuyStepOnePageState extends State<NeedToBuyStepOnePage>
       width: double.infinity,
       padding: UIHelper.horizontalEdgeInsets16,
       height: Dimens.size40,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: MyColors.primaryWhite,
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(Dimens.size24),
@@ -276,13 +298,29 @@ class _NeedToBuyStepOnePageState extends State<NeedToBuyStepOnePage>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            "London Fields, London",
-            style: _themeData
-                .textTheme.subtitle2.regular.size14.letterSpacing0p6.textBlack,
+          Expanded(
+            child: TextField(
+              controller: _locationController,
+              textCapitalization: TextCapitalization.sentences,
+              decoration: InputDecoration(
+                hintText: "Your location",
+                contentPadding: const EdgeInsets.only(bottom: Dimens.size6),
+                border: InputBorder.none,
+                hintStyle: TextStyle(
+                    color: MyColors.primaryBlack.withOpacity(0.38),
+                    letterSpacing: 0.6),
+              ),
+              style: _themeData.textTheme.subtitle2.regular.size14
+                  .letterSpacing0p6.textBlack,
+            ),
           ),
           UIHelper.horizontalBox12,
-          SvgPicture.asset(SVGConstants.icCloseCircle),
+          InkWell(
+            onTap: (){
+              _locationController.clear();
+            },
+            child: SvgPicture.asset(SVGConstants.icCloseCircle),
+          ),
         ],
       ),
     );

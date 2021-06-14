@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_common/common.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:keyboard_visibility/keyboard_visibility.dart';
+import 'package:sdk/flutter_sdk.dart';
 
-import '../../widget/widget.dart';
-import '../../resources/resources.dart';
 import '../../constants.dart';
 import '../../extensions/extensions.dart';
+import '../../resources/resources.dart';
+import '../../widget/widget.dart';
 
 class NeedToBuyStepTwoPage extends StatefulWidget {
   final PageController pageController;
@@ -19,6 +21,29 @@ class NeedToBuyStepTwoPage extends StatefulWidget {
 class _NeedToBuyStepTwoPageState extends State<NeedToBuyStepTwoPage> {
   ThemeData _themeData;
 
+  final TextEditingController _locationController =
+      TextEditingController(text: "London Fields, London");
+
+  final BehaviorSubject<bool> _isShowKeyBroad =
+      BehaviorSubject<bool>.seeded(false);
+
+  @override
+  void initState() {
+    super.initState();
+    KeyboardVisibilityNotification().addNewListener(
+      onChange: (visible) {
+        _isShowKeyBroad.add(visible);
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _isShowKeyBroad.close();
+    _locationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     _themeData = Theme.of(context);
@@ -27,7 +52,7 @@ class _NeedToBuyStepTwoPageState extends State<NeedToBuyStepTwoPage> {
       height: double.infinity,
       decoration: BoxDecoration(
         color: MyColors.primaryWhite.withOpacity(0.92),
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topRight: Radius.circular(Dimens.size24),
           topLeft: Radius.circular(Dimens.size24),
         ),
@@ -44,24 +69,29 @@ class _NeedToBuyStepTwoPageState extends State<NeedToBuyStepTwoPage> {
                     UIHelper.verticalBox16,
                     _buildContainerTitleAndData(
                       title: "Facilities",
-                      widget: ContainerFacilities(),
+                      widget: const ContainerFacilities(),
                     ),
                     UIHelper.verticalBox24,
                     _buildContainerTitleAndData(
                       title: "Time",
-                      widget: ContainerTimes(),
+                      widget: const ContainerTimes(),
                     ),
                     UIHelper.verticalBox24,
                     _buildContainerTitleAndData(
                       title: "Don’t show",
-                      widget: ContainerDontShow(),
+                      widget: const ContainerDontShow(),
                     ),
                   ],
                 ),
               ),
             ),
           ),
-          _buildBottomButton(),
+          StreamBuilder<bool>(
+              stream: _isShowKeyBroad,
+              initialData: false,
+              builder: (context, snapshot) {
+                return snapshot.data ? UIHelper.emptyBox : _buildBottomButton();
+              }),
         ],
       ),
     );
@@ -72,7 +102,7 @@ class _NeedToBuyStepTwoPageState extends State<NeedToBuyStepTwoPage> {
       width: double.infinity,
       padding: UIHelper.horizontalEdgeInsets16,
       height: Dimens.size40,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: MyColors.primaryWhite,
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(Dimens.size24),
@@ -82,13 +112,30 @@ class _NeedToBuyStepTwoPageState extends State<NeedToBuyStepTwoPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            "London Fields, London",
-            style: _themeData
-                .textTheme.subtitle2.regular.size14.letterSpacing0p6.textBlack,
+          Expanded(
+            child: TextField(
+              enabled: false,
+              controller: _locationController,
+              textCapitalization: TextCapitalization.sentences,
+              decoration: InputDecoration(
+                hintText: "Your location",
+                contentPadding: const EdgeInsets.only(bottom: Dimens.size6),
+                border: InputBorder.none,
+                hintStyle: TextStyle(
+                    color: MyColors.primaryBlack.withOpacity(0.38),
+                    letterSpacing: 0.6),
+              ),
+              style: _themeData.textTheme.subtitle2.regular.size14
+                  .letterSpacing0p6.textBlack,
+            ),
           ),
           UIHelper.horizontalBox12,
-          SvgPicture.asset(SVGConstants.icCloseCircle),
+          InkWell(
+            onTap: (){
+              _locationController.clear();
+            },
+            child: SvgPicture.asset(SVGConstants.icCloseCircle),
+          ),
         ],
       ),
     );
@@ -121,9 +168,9 @@ class _NeedToBuyStepTwoPageState extends State<NeedToBuyStepTwoPage> {
           child: Container(
             height: Dimens.size66,
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 image: DecorationImage(
-              image: const AssetImage(ImageConstants.imgBottomNeedToBuy),
+              image: AssetImage(ImageConstants.imgBottomNeedToBuy),
             )),
           ),
         ),
@@ -141,7 +188,8 @@ class _NeedToBuyStepTwoPageState extends State<NeedToBuyStepTwoPage> {
                   color: MyColors.primary, width: Dimens.halfSize0p4),
             ),
             child: CircleButtonGradient(
-              SVGUrl: SVGConstants.icSearchLocation,
+              SVGUrl: SVGConstants.icSearch,
+              colorIcon: MyColors.primaryWhite,
             ),
           ),
         ),

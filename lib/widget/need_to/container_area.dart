@@ -35,7 +35,6 @@ class _ContainerAreaState extends State<ContainerArea>
             setState(() {
               _isExpanded = !_isExpanded;
             });
-            print(_isExpanded);
           },
           child: Row(
             children: [
@@ -49,7 +48,7 @@ class _ContainerAreaState extends State<ContainerArea>
                     ),
                     UIHelper.horizontalBox8,
                     SvgPicture.asset(
-                      _isExpanded
+                      !_isExpanded
                           ? SVGConstants.icDropUp
                           : SVGConstants.icDropDown,
                       color: MyColors.primary,
@@ -161,8 +160,8 @@ class _ContainerAreaState extends State<ContainerArea>
           padding: const EdgeInsets.symmetric(
               horizontal: Dimens.size20, vertical: Dimens.size16),
           decoration: BoxDecoration(
-            color: MyColors.primary.withOpacity(0.2),
-            borderRadius: BorderRadius.only(
+            color: MyColors.primary.withOpacity(0.08),
+            borderRadius: const BorderRadius.only(
               topRight: Radius.circular(Dimens.size24),
               bottomLeft: Radius.circular(Dimens.size24),
               bottomRight: Radius.circular(Dimens.size24),
@@ -184,9 +183,7 @@ class _ContainerAreaState extends State<ContainerArea>
     );
   }
 
-
-  Widget _buildItemSelect(
-      {@required String val}) {
+  Widget _buildItemSelect({@required String val}) {
     return InkWell(
       onTap: () {
         _checkValueByString(val: val);
@@ -200,7 +197,7 @@ class _ContainerAreaState extends State<ContainerArea>
                 .textTheme.subtitle2.size16.letterSpacing0p6.textBlack.medium,
           ),
           Text(
-             " m²",
+            " m²",
             style: _themeData
                 .textTheme.caption.size12.letterSpacing0p6.textBlack38.light,
           ),

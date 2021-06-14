@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_common/common.dart';
 import 'package:sdk/flutter_sdk.dart';
-import 'package:value_pro/pages/info_project/info_project.dart';
-import 'package:value_pro/pages/need_to/need_to.dart';
 
-import '../../widget/widget.dart';
-import '../../resources/resources.dart';
-import '../../router/router.dart';
 import '../../extensions/extensions.dart';
+import '../../pages/pages.dart';
+import '../../resources/resources.dart';
+import '../../widget/widget.dart';
 
 class NeedToPage extends StatefulWidget {
   const NeedToPage({Key key}) : super(key: key);
@@ -32,7 +30,7 @@ class _NeedToPageState extends BaseState<NeedToPage,BaseBloc> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "I need to",
+            'I need to',
             style: _themeData.textTheme.headline6.size20.regular
                 .letterSpa(0.6)
                 .textWhite,
@@ -41,14 +39,14 @@ class _NeedToPageState extends BaseState<NeedToPage,BaseBloc> {
           Row(
             children: [
               Expanded(
-                child: _buildButtonChoose(title: "Buy",onTap: (){
-                  nextPageBottomToTop(NeedToBuyPage());
+                child: _buildButtonChoose(title: 'Buy',onTap: (){
+                  nextPageBottomToTop(const NeedToBuyPage());
                 }),
               ),
               UIHelper.horizontalBox16,
               Expanded(
-                child: _buildButtonChoose(title: "Rent",onTap: (){
-                  nextPageBottomToTop(InfoProjectPage());
+                child: _buildButtonChoose(title: 'Rent',onTap: (){
+                  nextPageBottomToTop(const InfoProjectPage());
                 }),
               ),
             ],
@@ -67,7 +65,7 @@ class _NeedToPageState extends BaseState<NeedToPage,BaseBloc> {
         height: Dimens.size40,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimens.size16),
-          border: Border.all(color: MyColors.borderGray),
+          border: Border.all(color: MyColors.borderGray.withOpacity(0.38),),
         ),
         child: Text(
           title ?? '--',
@@ -79,7 +77,6 @@ class _NeedToPageState extends BaseState<NeedToPage,BaseBloc> {
   }
 
   @override
-  // TODO: implement bloc
   BaseBloc get bloc => null;
 }
 
